@@ -2,7 +2,23 @@
 
 ## RSS feed parser
 
-## Array map
+### Getting Started
+
+#### Prerequisites
+
+```
+yarn
+```
+
+#### Develop
+
+```
+yarn start
+```
+
+## Array methods
+
+### Array map
 
 ```javascript
 Array.prototype.mapClone = function (fn) {
@@ -14,7 +30,7 @@ Array.prototype.mapClone = function (fn) {
 }
 ```
 
-## Array filter
+### Array filter
 
 ```javascript
 Array.prototype.filterClone = function (fn) {
@@ -28,7 +44,7 @@ Array.prototype.filterClone = function (fn) {
 }
 ```
 
-## Array reduce
+### Array reduce
 
 ```javascript
 Array.prototype.reduceClone = function (fn, initialValue) {
