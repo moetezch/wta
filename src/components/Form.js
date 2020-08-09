@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import Parser from 'rss-parser'
 import Item from './Item'
 
-
-
 function Form() {
   const [inputValue, setInputValue] = useState('')
   const [parseError, setParseError] = useState('')
@@ -11,24 +9,24 @@ function Form() {
   const [itemsList, setItemsList] = useState([])
   const [selectedItem, setSelectedItem] = useState(null)
   function rssParser(url) {
-    let parser = new Parser();
-    const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+    let parser = new Parser()
+    const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/'
 
-    (async () => {
+    ;(async () => {
       try {
-        let feed = await parser.parseURL(CORS_PROXY + url);
+        let feed = await parser.parseURL(CORS_PROXY + url)
         setItemsList(feed.items)
         setButtonClasses('button is-link')
         setSelectedItem(feed.items[0])
       } catch (error) {
-        setParseError('Problem parsing the rss feed, please check the url or try again')
+        setParseError(
+          'Problem parsing the rss feed, please check the url or try again'
+        )
         setButtonClasses('button is-link')
         console.error(error)
       }
-
-    })();
+    })()
   }
-
 
   return (
     <>
@@ -46,11 +44,7 @@ function Form() {
           />
         </div>
       </div>
-      {
-        parseError && (
-          <p className="help is-danger">{parseError}</p>
-        )
-      }
+      {parseError && <p className='help is-danger'>{parseError}</p>}
       <div className='field'>
         <div className='control'>
           <button
@@ -60,32 +54,38 @@ function Form() {
               setButtonClasses('button is-link is-loading')
             }}
             disabled={!inputValue}
-          >Submit</button>
+          >
+            Submit
+          </button>
         </div>
       </div>
-      {
-        selectedItem && (
-          <>
-            <Item item={selectedItem}></Item>
-            <nav className="pagination is-right" role="navigation" aria-label="pagination">
-              <ul className="pagination-list">
-                {
-                  itemsList.map((list, index) => {
-                    const classes = 'pagination-link' + (list === selectedItem ? ' is-current' : '')
-                    return (
-                      <li
-                        onClick={() => setSelectedItem(itemsList[index])}
-                        key={index}
-                      > <a className={classes}>{index + 1}</a></li >
-                    )
-                  }
-                  )
-                }
-              </ul>
-            </nav>
-          </>
-        )
-      }
+      {selectedItem && (
+        <>
+          <Item item={selectedItem}></Item>
+          <nav
+            className='pagination is-right'
+            role='navigation'
+            aria-label='pagination'
+          >
+            <ul className='pagination-list'>
+              {itemsList.map((list, index) => {
+                const classes =
+                  'pagination-link' +
+                  (list === selectedItem ? ' is-current' : '')
+                return (
+                  <li
+                    onClick={() => setSelectedItem(itemsList[index])}
+                    key={Object.values(list)[0] + Object.values(list)[1]}
+                  >
+                    {' '}
+                    <a className={classes}>{index + 1}</a>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+        </>
+      )}
     </>
   )
 }
